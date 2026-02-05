@@ -94,7 +94,7 @@ jobs:
         env:
           GITHUB_SHA: ${{ github.sha }}
         run: |
-          DOCKER_IMAGE=cubejs/cubestore
+          DOCKER_IMAGE=${{ github.repository_owner }}/cubestore
           VERSION="dev${{ matrix.postfix }}"
 
           if [ "${{ github.event_name }}" = "schedule" ]; then
@@ -157,7 +157,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: cubejs/cubestore
+          repository: ${{ github.repository_owner }}/cubestore
           readme-filepath: ./rust/cubestore/README.md
 
   cubestore:
@@ -264,19 +264,19 @@ jobs:
           # Please use minimal possible version of ubuntu, because it produces constraint on glibc
           - os: ubuntu-22.04
             target: x86_64-unknown-linux-gnu
-            image: cubejs/rust-cross:x86_64-unknown-linux-gnu-15082024
+            image: ${{ github.repository_owner }}/rust-cross:x86_64-unknown-linux-gnu-15082024
             executable_name: cubestored
             strip: true
             compress: false
           - os: ubuntu-22.04
             target: x86_64-unknown-linux-musl
-            image: cubejs/rust-cross:x86_64-unknown-linux-musl-15082024
+            image: ${{ github.repository_owner }}/rust-cross:x86_64-unknown-linux-musl-15082024
             executable_name: cubestored
             strip: true
             # cubestored: CantPackException: bad DT_HASH nbucket=0x344  len=0x1890
             compress: false
           - os: ubuntu-24.04-arm
-            image: cubejs/rust-builder:bullseye-llvm-18
+            image: ${{ github.repository_owner }}/rust-builder:bullseye-llvm-18
             target: aarch64-unknown-linux-gnu
             executable_name: cubestored
             # Unable to recognise the format of the input file `rust/cubestore/target/aarch64-unknown-linux-gnu/release/cubestored'

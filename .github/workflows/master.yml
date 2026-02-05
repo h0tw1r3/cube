@@ -48,7 +48,7 @@ jobs:
     timeout-minutes: 60
     name: Build Linux Native backend for Dev image
     container:
-      image: cubejs/rust-cross:x86_64-unknown-linux-gnu-15082024-python-3.11
+      image: ${{ github.repository_owner }}/rust-cross:x86_64-unknown-linux-gnu-15082024-python-3.11
 
     steps:
       - name: Checkout
@@ -123,13 +123,13 @@ jobs:
           file: ./packages/cubejs-docker/dev.Dockerfile
           platforms: linux/amd64
           push: true
-          tags: cubejs/cube:dev
+          tags: ${{ github.repository_owner }}/cube:dev
       - name: Update repo description
         uses: peter-evans/dockerhub-description@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: cubejs/cube
+          repository: ${{ github.repository_owner }}/cube
           readme-filepath: ./packages/cubejs-docker/README.md
 
   trigger-test-suites:
@@ -149,12 +149,12 @@ jobs:
             const commitUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${context.sha}`;
 
             await github.rest.actions.createWorkflowDispatch({
-              owner: 'cubedevinc',
+              owner: '${{ github.repository_owner }}',
               repo: 'sql-api-test-suite',
               workflow_id: 'test_and_run_test_suites.yml',
               ref: 'main',
               inputs: {
-                'cube-image': 'cubejs/cube:dev',
+                'cube-image': '${{ github.repository_owner }}/cube:dev',
                 'source-repo': `${context.repo.owner}/${context.repo.repo}`,
                 'source-pr-url': prUrl,
                 'source-commit-url': commitUrl,

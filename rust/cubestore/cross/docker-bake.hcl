@@ -43,13 +43,17 @@ variable "PYTHON_VERSIONS" {
   ]
 }
 
+variable "NAMESPACE" {
+  default = "cubejs"
+}
+
 target "aarch64-unknown-linux-gnu" {
   context = "."
   dockerfile = "aarch64-unknown-linux-gnu.Dockerfile"
   args = {
     LLVM_VERSION = LLVM_VERSION
   }
-  tags = ["cubejs/rust-cross:aarch64-unknown-linux-gnu-${CROSS_VERSION}"]
+  tags = ["${NAMESPACE}/rust-cross:aarch64-unknown-linux-gnu-${CROSS_VERSION}"]
   platforms = ["linux/amd64"]
 }
 
@@ -69,7 +73,7 @@ target "aarch64-unknown-linux-gnu-python" {
     PYTHON_RELEASE = item.python_release,
     PYTHON_VERSION_SUFFIX = item.python_version_sufix
   }
-  tags = ["cubejs/rust-cross:aarch64-unknown-linux-gnu-${CROSS_VERSION}-python-${item.python_release}"]
+  tags = ["${NAMESPACE}/rust-cross:aarch64-unknown-linux-gnu-${CROSS_VERSION}-python-${item.python_release}"]
   platforms = ["linux/amd64"]
 }
 
@@ -79,7 +83,7 @@ target "x86_64-unknown-linux-musl" {
   args = {
     LLVM_VERSION = LLVM_VERSION
   }
-  tags = ["cubejs/rust-cross:x86_64-unknown-linux-musl-${CROSS_VERSION}"]
+  tags = ["${NAMESPACE}/rust-cross:x86_64-unknown-linux-musl-${CROSS_VERSION}"]
   platforms = ["linux/amd64"]
 }
 
@@ -89,7 +93,7 @@ target "x86_64-unknown-linux-gnu" {
   args = {
     LLVM_VERSION = LLVM_VERSION
   }
-  tags = ["cubejs/rust-cross:x86_64-unknown-linux-gnu-${CROSS_VERSION}"]
+  tags = ["${NAMESPACE}/rust-cross:x86_64-unknown-linux-gnu-${CROSS_VERSION}"]
   platforms = ["linux/amd64"]
 }
 
@@ -109,6 +113,6 @@ target "x86_64-unknown-linux-gnu-python" {
     PYTHON_RELEASE = item.python_release
     PYTHON_VERSION_SUFFIX = item.python_version_sufix
   }
-  tags = ["cubejs/rust-cross:x86_64-unknown-linux-gnu-${CROSS_VERSION}-python-${item.python_release}"]
+  tags = ["${NAMESPACE}/rust-cross:x86_64-unknown-linux-gnu-${CROSS_VERSION}-python-${item.python_release}"]
   platforms = ["linux/amd64"]
 }
