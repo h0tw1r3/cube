@@ -94,7 +94,7 @@ jobs:
         env:
           GITHUB_SHA: ${{ github.sha }}
         run: |
-          DOCKER_IMAGE=cubejs/cubestore
+          DOCKER_IMAGE=${{ github.repository_owner }}/cubestore
           VERSION="dev${{ matrix.postfix }}"
 
           if [ "${{ github.event_name }}" = "schedule" ]; then
@@ -157,7 +157,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: cubejs/cubestore
+          repository: ${{ github.repository_owner }}/cubestore
           readme-filepath: ./rust/cubestore/README.md
 
   cubestore:
