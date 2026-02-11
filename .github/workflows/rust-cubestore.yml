@@ -76,11 +76,11 @@ jobs:
           - os: ubuntu-24.04
             target: x86_64-unknown-linux-gnu
             platforms: linux/amd64
-            build-args: WITH_AVX2=1
+            build-args: WITH_AVX2=1 NAMESPACE=${{ github.repository_owner }}
           - os: ubuntu-24.04-arm
             target: aarch64-unknown-linux-gnu
             platforms: linux/arm64
-            build-args: WITH_AVX2=0
+            build-args: WITH_AVX2=0 NAMESPACE=${{ github.repository_owner }}
     timeout-minutes: 60
     if: github.ref != 'refs/heads/master'
     steps:
