@@ -1,4 +1,5 @@
-FROM cubejs/rust-builder:bookworm-llvm-18 AS builder
+ARG NAMESPACE=cubejs
+FROM ${NAMESPACE}/rust-builder:bookworm-llvm-18 AS builder
 
 WORKDIR /build/cubestore
 

@@ -1,3 +1,7 @@
+variable "NAMESPACE" {
+  default = "cubejs"
+}
+
 # EOL LTS 2028-06-30
 target "rust-builder-bookworm" {
   context = "."
@@ -7,7 +11,7 @@ target "rust-builder-bookworm" {
     OS_NAME = "bookworm"
     LLVM_VERSION = "18"
   }
-  tags = ["cubejs/rust-builder:bookworm-llvm-18"]
+  tags = ["${NAMESPACE}/rust-builder:bookworm-llvm-18"]
   platforms = ["linux/amd64", "linux/arm64"]
 }
 
@@ -20,6 +24,6 @@ target "rust-builder-bullseye" {
     OS_NAME = "bullseye"
     LLVM_VERSION = "18"
   }
-  tags = ["cubejs/rust-builder:bullseye-llvm-18"]
+  tags = ["${NAMESPACE}/rust-builder:bullseye-llvm-18"]
   platforms = ["linux/amd64", "linux/arm64"]
 }
